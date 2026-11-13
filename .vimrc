@@ -1,59 +1,79 @@
+" Must be first: disable Vi compatibility mode and enable Vim features.
+set nocompatible
 
-" 语法高亮度显示
+" Enable syntax highlighting.
 syntax on
-"jj映射到esc"
+
+" Enable filetype detection, filetype plugins, and filetype indent rules.
+" This is required for FileType autocmds such as the Makefile rule below.
+filetype plugin indent on
+
+" Use light background highlight groups.
+" morning is a built-in light color scheme.
+" If you want another light theme, try: colorscheme peachpuff
+set background=light
+colorscheme morning
+
+" In Insert mode, typing jj exits to Normal mode.
 inoremap jj <Esc>
 
-"搜索匹配高亮
+" Highlight all search matches.
 set hlsearch
 
-set cuc
-set cul
-" 设置行号
-set nu
+" Highlight the cursor column and cursor line.
+" set cursorcolumn
+" set cursorline
 
-"防止中文注释乱码
+" Show absolute line numbers.
+set number
+
+" Internal encoding used by Vim.
+set encoding=utf-8
+
+" Encoding used when writing the current buffer.
 set fileencoding=utf-8
-set fenc=utf-8
-set fencs=utf-8,usc-bom,euc-jp,gb18030,gbk,gb2312,cp936,big－5                    
-set enc=utf-8
+
+" Encodings tried when reading a file.
+" ucs-bom must come before utf-8 so a UTF-8 BOM is detected correctly.
+" big5 must be ASCII half-width; the original big－5 used a full-width minus.
+set fileencodings=ucs-bom,utf-8,gb18030,gbk,big5,euc-jp,cp936
+
+" Terminal encoding should match Vim's internal encoding.
 let &termencoding=&encoding
 
-"设置字体
+" GUI font. Only effective in GVim/MacVim GUI, not in terminal Vim.
 set guifont=Monospace\ 13
 
-" 设置tab4个空格
+" Visual width of a Tab character.
 set tabstop=4
+
+" Insert spaces instead of real Tab characters.
 set expandtab
 
-"程序自动缩进时候空格数
+" Number of spaces used for autoindent and >>/<<.
 set shiftwidth=4
 
-"退格键一次删除4个空格
+" In Insert mode, Tab/Backspace behave like 4 spaces.
 set softtabstop=4
-autocmd FileType make set noexpandtab
 
-" 在编辑过程中，在右下角显示光标位置的状态行
+" Makefiles require real Tab characters, so disable expandtab for make files.
+autocmd FileType make setlocal noexpandtab
+
+" Show cursor position row,column in the status line.
 set ruler
 
-" 搜索忽略大小写 
-set ignorecase 
+" Ignore case in search patterns.
+set ignorecase
 
-" vim使用自动对起，也就是把当前行的对起格式应用到下一行
+" Copy the indentation of the previous line.
 set autoindent
 
-" 依据上面的对起格式，智能的选择对起方式，对于类似C语言编写上很有用
+" Use C-like smart indentation for source code.
 set smartindent
 
-" 在状态列显示目前所执行的指令
+" Show partially typed commands in the status line.
 set showcmd
 
-" 设置颜色主题
-colorscheme desert
-
-set nocompatible
+" Allow Backspace to delete over autoindent, line breaks, and insertion start.
 set backspace=indent,eol,start
 
-
-" Module top note information
-:map <F5> 1GO<ESC>ggi// *********************************************************************************<cr><ESC>0d$i// Project Name : OSXXXX<cr><ESC>0d$i// Author       : Core_kingdom<cr><ESC>0d$i// Website      : https://blog.csdn.net/weixin_40377195<cr><ESC>0d$i// Create Time  : <C-R>=strftime("%F")<CR><cr><ESC>0d$i// File Name    : .v<cr><ESC>0d$i// Module Name  :<cr><ESC>0d$i// Called By    :<cr><ESC>0d$i// Abstract     :<cr><ESC>0d$i//<cr><ESC>0d$i// <cr><ESC>0d$i// *********************************************************************************<cr><ESC>0d$i// Modification History:<cr><ESC>0d$i// Date         By              Version                 Change Description<cr><ESC>0d$i// -----------------------------------------------------------------------<cr><ESC>0d$i// <C-R>=strftime("%F")<CR>    Macro           1.0                     Original<cr><ESC>0d$i//  <cr><ESC>0d$i// *********************************************************************************<cr><ESC>0d$i
